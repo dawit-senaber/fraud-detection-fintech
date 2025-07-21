@@ -1,0 +1,5 @@
+dataset,model,auc_roc,auc_pr,f1_score,model_path
+ecommerce,logistic,0.7386046648240732,0.32775056800755253,0.3537153419593346,./models/ecommerce\logistic_model.pkl
+ecommerce,xgboost,0.7811064968777589,0.6421148265591009,0.7141624978437122,./models/ecommerce\xgboost_model.pkl
+creditcard,logistic,0.9658834905497758,0.7069015176326771,0.0944822373393802,./models/creditcard\logistic_model.pkl
+creditcard,xgboost,0.9686613668548667,0.7629711446714916,0.7483443708609272,./models/creditcard\xgboost_model.pkl
