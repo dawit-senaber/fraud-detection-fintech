@@ -37,8 +37,8 @@ jobs:
     
     - name: Run tests with coverage
       run: |
-        # Use coverage directly instead of pytest-cov if there are issues
-        coverage run -m pytest tests/ -v
+        # Set PYTHONPATH to include the current directory
+        PYTHONPATH=. coverage run -m pytest tests/ -v
         coverage xml
     
     - name: Upload coverage to Codecov
