@@ -59,119 +59,149 @@ Built for **finance professionals**, FRAUDGUARD PRO transforms fraud management 
 
 ---
 
-## 🏗️ Technology Stack  
+## 🏗️ Project Structure  
 
-**Core Components:**  
-- Machine Learning: **XGBoost, Scikit-Learn**  
-- Explainability: **SHAP, LIME**  
-- Dashboard: **Streamlit, Plotly**  
-- Engineering: **Pytest, GitHub Actions, Codecov**  
-- Data Processing: **Pandas, NumPy**  
+```text
+fraud-detection-fintech/
+├── .github/
+│   └── workflows/
+│       └── ci.yml                      # GitHub Actions CI/CD pipeline
+├── data/                               # Data directory (gitignored)
+│   ├── creditcard.csv                  # Raw credit card data
+│   ├── Fraud_Data.csv                  # Raw e-commerce data
+│   ├── IpAddress_to_Country.csv        # IP to country mapping
+│   ├── processed_creditcard.csv        # Processed credit card data
+│   ├── processed_ecommerce.csv         # Processed e-commerce data
+│   └── balanced/                       # Balanced datasets
+│       ├── creditcard_train_balanced.csv
+│       ├── creditcard_test.csv
+│       ├── ecommerce_train_balanced.csv
+│       └── ecommerce_test.csv
+├── models/                             # Trained models (gitignored)
+│   ├── creditcard/
+│   │   ├── logistic_model.pkl
+│   │   └── xgboost_model.pkl
+│   ├── ecommerce/
+│   │   ├── logistic_model.pkl
+│   │   └── xgboost_model.pkl
+│   └── creditcard_preprocessor.pkl     # Preprocessing pipeline
+├── results/                            # Results and visualizations (gitignored)
+│   └── shap_plots/
+│       ├── creditcard_logistic_summary.png
+│       ├── creditcard_logistic_bar.png
+│       ├── creditcard_logistic_force.png
+│       ├── creditcard_xgboost_summary.png
+│       ├── creditcard_xgboost_bar.png
+│       ├── creditcard_xgboost_force.png
+│       ├── ecommerce_logistic_summary.png
+│       ├── ecommerce_logistic_bar.png
+│       ├── ecommerce_logistic_force.png
+│       ├── ecommerce_xgboost_summary.png
+│       ├── ecommerce_xgboost_bar.png
+│       └── ecommerce_xgboost_force.png
+├── src/                                # Source code
+│   ├── preprocessing/
+│   │   ├── __init__.py
+│   │   ├── creditcard_preprocessing.py # Credit card data preprocessing
+│   │   └── ecommerce_preprocessing.py  # E-commerce data preprocessing
+│   ├── __init__.py
+│   ├── balance_data.py                 # Data balancing with SMOTE-ENN
+│   ├── explainability.py               # SHAP explainability module
+│   ├── financial_impact.py             # Financial impact calculator
+│   ├── model_training.py               # Model training and evaluation
+│   └── utils.py                        # Utility functions
+├── tests/                              # Test suite
+│   ├── __init__.py
+│   ├── test_basic.py                   # Basic import and functionality tests
+│   ├── test_creditcard_preprocessing.py # Credit card preprocessing tests
+│   ├── test_ecommerce_preprocessing.py # E-commerce preprocessing tests
+│   ├── test_balance_data.py            # Data balancing tests
+│   ├── test_model_training.py          # Model training tests
+│   └── test_explainability.py          # Explainability tests
+├── scripts/
+│   └── setup_test_data.py              # Script to create test data for CI
+├── app.py                              # Streamlit dashboard application
+├── config.yaml                         # Configuration file
+├── requirements.txt                    # Python dependencies
+├── .gitignore                          # Git ignore rules
+├── LICENSE                             # MIT License
+└── README.md                           # Project documentation
 
-**System Architecture:**  
-```mermaid
-flowchart TD
-    A[Raw Transaction Data] --> B[Preprocessing & Feature Engineering]
-    B --> C[Machine Learning Models (XGBoost)]
-    C --> D[Fraud Scoring Service]
-    D --> E[Dashboard & Reporting (Streamlit/Plotly)]
-    D --> F[Monitoring & Drift Detection]
-    F --> G[Compliance & Audit Logs]
+## 📂 Key Files & Modules  
 
-⚙️ Installation
-Requirements
-    - Python 3.10+
-    - PostgreSQL (for production use)
-    - Minimum 4GB RAM
+### 🔑 Core Application Files  
+- **`app.py`** → Main Streamlit dashboard with financial risk visualization  
+- **`config.yaml`** → Configuration for data paths, model paths, and parameters  
+- **`requirements.txt`** → Python dependencies  
 
-Quick Start
+### 🖥️ Source Code (`src/`)  
+- **`preprocessing/creditcard_preprocessing.py`** → Credit card data cleaning & feature engineering  
+- **`preprocessing/ecommerce_preprocessing.py`** → E-commerce data processing with IP geolocation  
+- **`balance_data.py`** → Handles class imbalance with **SMOTE-ENN**  
+- **`model_training.py`** → Trains & evaluates **logistic regression** and **XGBoost** models  
+- **`explainability.py`** → Generates **SHAP explanations** for model interpretability  
+- **`financial_impact.py`** → Calculates **financial impact** of fraud decisions  
+- **`utils.py`** → Utility functions & helpers  
 
+### 🧪 Testing Suite (`tests/`)  
+- **`test_basic.py`** → Basic functionality/import tests  
+- **`test_creditcard_preprocessing.py`** → Credit card preprocessing tests  
+- **`test_ecommerce_preprocessing.py`** → E-commerce preprocessing tests  
+- **`test_balance_data.py`** → Data balancing tests  
+- **`test_model_training.py`** → Model training tests  
+- **`test_explainability.py`** → SHAP explainability tests  
+
+### ⚙️ CI/CD & Deployment  
+- **`.github/workflows/ci.yml`** → GitHub Actions CI/CD pipeline  
+- **`scripts/setup_test_data.py`** → Generates minimal test data for CI  
+
+---
+
+## ⚙️ Installation  
+
+### Requirements  
+- Python **3.10+**  
+- PostgreSQL (**for production**)  
+- Minimum **4GB RAM**  
+
+### Setup  
+```bash
 # Clone repository
-git clone https://github.com/dawit-senaber/fraud-detection-fintech.git
+git clone https://github.com/david-de-mozart/fraud-detection-fintech.git
 cd fraud-detection-fintech
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Run full pipeline
-python src/pipeline.py
 
-# Launch dashboard
-streamlit run app.py
+▶️ Running the System
+Preprocess Data
 
-Configuration
+python src/preprocessing/creditcard_preprocessing.py
+python src/preprocessing/ecommerce_preprocessing.py
 
-Create config.yaml from template:
+Balance Datasets
 
-data:
-  creditcard_raw: './data/creditcard.csv'
-  ecommerce_raw: './data/Fraud_Data.csv'
-  ip_country: './data/IpAddress_to_Country.csv'
+python src/balance_data.py
 
-models:
-  creditcard_model: './models/creditcard/xgboost_model.pkl'
-  creditcard_preprocessor: './models/creditcard_preprocessor.pkl'
+Train Models
 
-monitoring:
-  drift_threshold: 0.02
+python src/model_training.py
 
 
-- Place datasets in the specified directories
+Generate Explanations
 
-- Customize financial parameters in the dashboard UI
-
-
-📂 Usage
-For Data Scientists
-
-from src.financial_impact import FraudCostCalculator
-
-# Calculate transaction savings
-calculator = FraudCostCalculator(fp_cost=10, fn_cost=100)
-savings = calculator.calculate_savings(
-    transactions, 
-    fraud_probs, 
-    threshold=0.5
-)
-
-print(f"Projected savings: ${savings['net']:,.2f}")
+python src/explainability.py
 
 
-For Financial Analysts
+Launch Dashboard
 
 streamlit run app.py
 
-    - Configure transaction parameters
-    - Analyze risk profiles & financial impact
-    - Generate compliance reports
 
-For Production Deployment
+Run Tests
 
-# Run with Gunicorn (production)
-gunicorn app:server --workers 4 --timeout 120
-
-# Enable monitoring
-python src/monitoring/drift_detector.py
-
-
-📘 Technical Documentation
-
-| Module                 | Purpose                                       |
-| ---------------------- | --------------------------------------------- |
-| `src/preprocessing`    | Financial data cleaning & feature engineering |
-| `src/model_training`   | Fraud model development                       |
-| `src/financial_impact` | Savings & ROI calculation                     |
-| `src/compliance`       | Regulatory validation                         |
-| `src/monitoring`       | Production performance tracking               |
-
-
-✅ Testing
-
-# Run all tests
-pytest --cov=src
-
-# Generate coverage report
-coverage html
+pytest tests/ --cov=src
 
 
 📄 License
@@ -179,14 +209,11 @@ coverage html
 This project is licensed under the MIT License – see LICENSE
  for details.
 
- 📬 Contact
-
-Dawit Senaber
+ Dawit Senaber
 Cybersecurity & Financial AI Specialist
-📧 Email: dsenaber@gmail.com
 
-🔗 LinkedIn - Dawit Senaber
+📧 dsenaber@gmail.com
 
-💻 GitHub - Dawit Senaber
+🔗 LinkedIn - https://linkedin.com/in/dawitsenaber
 
-⚡ FRAUDGUARD PRO – Transforming financial risk into strategic advantage through AI-powered security.
+💻 GitHub - https://github.com/dawit-senaber
