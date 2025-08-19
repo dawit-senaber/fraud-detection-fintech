@@ -35,9 +35,8 @@ jobs:
     
     - name: Run tests with coverage
       run: |
-        # Set PYTHONPATH to include the current directory (Linux syntax)
-        export PYTHONPATH=.
-        python -m pytest tests/ --cov=src --cov-report=xml --cov-fail-under=0
+        # Set PYTHONPATH and run pytest in the same command
+        PYTHONPATH=. python -m pytest tests/ --cov=src --cov-report=xml --cov-fail-under=0
     
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
