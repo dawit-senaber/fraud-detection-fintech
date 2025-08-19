@@ -34,10 +34,9 @@ jobs:
         echo "86400,1000,1,-0.5,0.8,-1.2" >> data/creditcard_sample.csv
     
     - name: Run tests with coverage
-      env:
-        PYTHONPATH: ./src  # Ensure src folder is in the Python path
       run: |
-        python -m pytest tests/ --cov=src --cov-report=xml --cov-fail-under=0
+        # Set PYTHONPATH to include the current directory
+        PYTHONPATH=. python -m pytest tests/ --cov=src --cov-report=xml --cov-fail-under=0
     
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
