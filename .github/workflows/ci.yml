@@ -22,11 +22,24 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install pytest pytest-cov
+        # Explicitly install pytest and coverage packages
+        pip install pytest==7.4.0 coverage==7.3.0 pytest-cov==4.1.0
+    
+    - name: Create test data directory
+      run: mkdir -p data
+    
+    - name: Create minimal test files
+      run: |
+        # Create minimal test data to avoid file not found errors
+        echo "Time,Amount,Class,V1,V2,V3" > data/creditcard_sample.csv
+        echo "0,100,0,0.1,-0.2,0.3" >> data/creditcard_sample.csv
+        echo "86400,1000,1,-0.5,0.8,-1.2" >> data/creditcard_sample.csv
     
     - name: Run tests with coverage
       run: |
-        python -m pytest tests/ --cov=src --cov-report=xml -v
+        # Use coverage directly instead of pytest-cov if there are issues
+        coverage run -m pytest tests/ -v
+        coverage xml
     
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
