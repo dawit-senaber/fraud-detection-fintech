@@ -35,8 +35,9 @@ jobs:
     
     - name: Run tests with coverage
       run: |
-        # Set PYTHONPATH and run pytest in the same command
-        PYTHONPATH=. python -m pytest tests/ --cov=src --cov-report=xml --cov-fail-under=0
+        # Use Python's module execution to set the path correctly
+        cd /home/runner/work/fraud-detection-fintech/fraud-detection-fintech
+        PYTHONPATH=/home/runner/work/fraud-detection-fintech/fraud-detection-fintech python -m pytest tests/ --cov=src --cov-report=xml --cov-fail-under=0
     
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
