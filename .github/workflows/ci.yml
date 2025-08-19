@@ -35,7 +35,7 @@ jobs:
     
     - name: Run tests with coverage
       env:
-        PYTHONPATH: .
+        PYTHONPATH: ./src  # Ensure src folder is in the Python path
       run: |
         python -m pytest tests/ --cov=src --cov-report=xml --cov-fail-under=0
     
