@@ -22,8 +22,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        # Explicitly install pytest and coverage packages
-        pip install pytest==7.4.0 coverage==7.3.0 pytest-cov==4.1.0
+        pip install pytest pytest-cov
     
     - name: Create test data directory
       run: mkdir -p data
@@ -36,10 +35,10 @@ jobs:
         echo "86400,1000,1,-0.5,0.8,-1.2" >> data/creditcard_sample.csv
     
     - name: Run tests with coverage
+      env:
+        PYTHONPATH: .  # Set PYTHONPATH environment variable
       run: |
-        # Set PYTHONPATH to include the current directory
-        PYTHONPATH=. coverage run -m pytest tests/ -v
-        coverage xml
+        python -m pytest tests/ --cov=src --cov-report=xml
     
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
