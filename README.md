@@ -167,7 +167,7 @@ fraud-detection-fintech/
 ### Setup  
 ```bash
 # Clone repository
-git clone https://github.com/david-de-mozart/fraud-detection-fintech.git
+git clone https://github.com/dawit-senaber/fraud-detection-fintech.git
 cd fraud-detection-fintech
 
 # Install dependencies
