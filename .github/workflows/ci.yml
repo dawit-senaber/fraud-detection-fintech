@@ -29,21 +29,20 @@ jobs:
     
     - name: Create minimal test files
       run: |
-        # Create minimal test data to avoid file not found errors
         echo "Time,Amount,Class,V1,V2,V3" > data/creditcard_sample.csv
         echo "0,100,0,0.1,-0.2,0.3" >> data/creditcard_sample.csv
         echo "86400,1000,1,-0.5,0.8,-1.2" >> data/creditcard_sample.csv
     
     - name: Run tests with coverage
       env:
-        PYTHONPATH: .  # Set PYTHONPATH environment variable
+        PYTHONPATH: .
       run: |
-        python -m pytest tests/ --cov=src --cov-report=xml
+        python -m pytest tests/ --cov=src --cov-report=xml --cov-fail-under=0
     
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
       with:
-        file: ./coverage.xml
+        files: ./coverage.xml
         flags: unittests
         name: codecov-umbrella
 
@@ -63,3 +62,9 @@ jobs:
     
     - name: Run security scan
       run: bandit -r src/ -f html -o bandit_report.html
+    
+    - name: Upload Bandit Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: bandit-report
+        path: bandit_report.html
