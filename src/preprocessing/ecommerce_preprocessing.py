@@ -5,8 +5,8 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # Load data
-fraud_data = pd.read_csv('./data/Fraud_Data.csv')
-ip_country = pd.read_csv('./data/IpAddress_to_Country.csv')
+fraud_data = pd.read_csv('./data/raw/Fraud_Data.csv')
+ip_country = pd.read_csv('./data/raw/IpAddress_to_Country.csv')
 
 print(f"Original dataset size: {len(fraud_data)} records")
 print(f"Missing IPs before: {fraud_data['ip_address'].isna().sum()}")
@@ -81,7 +81,7 @@ fraud_data = fraud_data.dropna(subset=['device_id', 'source', 'browser', 'countr
 print(f"Missing values after cleaning: {fraud_data.isna().sum().sum()}")
 
 # Save processed data
-fraud_data.to_csv('./data/processed_ecommerce.csv', index=False)
+fraud_data.to_csv('./data/processed/processed_ecommerce.csv', index=False)
 print("\nE-commerce data processed successfully!")
 print(f"Final dataset size: {len(fraud_data)} records")
 print(f"Fraud rate: {fraud_data['class'].mean():.4f}")

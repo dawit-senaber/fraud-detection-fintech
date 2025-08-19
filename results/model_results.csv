@@ -1,5 +1,5 @@
-dataset,model,auc_roc,auc_pr,f1_score,model_path
-ecommerce,logistic,0.7386046648240732,0.32775056800755253,0.3537153419593346,./models/ecommerce\logistic_model.pkl
-ecommerce,xgboost,0.7811064968777589,0.6421148265591009,0.7141624978437122,./models/ecommerce\xgboost_model.pkl
-creditcard,logistic,0.9658834905497758,0.7069015176326771,0.0944822373393802,./models/creditcard\logistic_model.pkl
-creditcard,xgboost,0.9686613668548667,0.7629711446714916,0.7483443708609272,./models/creditcard\xgboost_model.pkl
+dataset,model,auc_roc,auc_pr,f1_score,optimal_threshold,min_cost,model_path,preprocessor_path,feature_importance,cost_plot
+ecommerce,logistic,0.7632930607014254,0.43817264269525125,0.27939514610127536,0.6702016583816532,184240,./models//ecommerce\logistic_model.pkl,./models//ecommerce\preprocessor.pkl,./results/shap_plots/ecommerce_logistic_feature_importance.png,./results/cost_curves/ecommerce_logistic_cost_curve.png
+ecommerce,xgboost,0.7815895964150026,0.6379358174488813,0.7058222676200204,0.48975735902786255,161720,./models//ecommerce\xgboost_model.pkl,./models//ecommerce\preprocessor.pkl,./results/shap_plots/ecommerce_xgboost_feature_importance.png,./results/cost_curves/ecommerce_xgboost_cost_curve.png
+creditcard,logistic,0.9649184293295073,0.6990301678297328,0.09375,0.999995872348099,3350,./models//creditcard\logistic_model.pkl,,./results/shap_plots/creditcard_logistic_feature_importance.png,./results/cost_curves/creditcard_logistic_cost_curve.png
+creditcard,xgboost,0.9766577008653314,0.6378872000828796,0.4432234432234432,0.8595247268676758,3340,./models//creditcard\xgboost_model.pkl,,./results/shap_plots/creditcard_xgboost_feature_importance.png,./results/cost_curves/creditcard_xgboost_cost_curve.png

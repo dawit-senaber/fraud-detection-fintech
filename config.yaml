@@ -1,0 +1,32 @@
+# config.yaml
+data:
+  mean_amount: 88.35
+  creditcard_raw: './data/raw/creditcard.csv'
+  ecommerce_raw: './data/raw/Fraud_Data.csv'
+  ip_country: './data/raw/IpAddress_to_Country.csv'
+  processed_creditcard: './data/processed/processed_creditcard.csv'
+  processed_ecommerce: './data/processed/processed_ecommerce.csv'
+  balanced_dir: './data/balanced/'
+  
+models_dir: './models/'
+models:
+  creditcard_model: './models/creditcard/xgboost_model.pkl'
+  creditcard_preprocessor: './models/creditcard_preprocessor.pkl'
+  ecommerce_model: './models/ecommerce/xgboost_model.pkl'
+  ecommerce_preprocessor: './models/ecommerce/preprocessor.pkl'
+  
+monitoring:
+  drift_threshold: 0.02
+  performance_interval: 7
+
+balancing:
+  risk_ratio: 10
+
+financial_impact:
+  false_positive_cost: 10   # Cost per false alarm ($)
+  false_negative_cost: 100  # Cost per missed fraud ($)
+
+results:
+  base_dir: './results'
+  shap_dir: './results/shap_plots'
+  cost_dir: './results/cost_curves'
